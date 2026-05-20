@@ -1,6 +1,6 @@
 # License Status: A Model for Optimizing Electronic Toll Collection Systems
 
-Generated: 2026-05-20 13:10:44 AEST
+Generated: 2026-05-20 13:31:26 AEST
 
 Recorded license/access note from the verified audit row: Publisher terms apply to article PDF; repository license still needed for author-created code/workbooks.
 
