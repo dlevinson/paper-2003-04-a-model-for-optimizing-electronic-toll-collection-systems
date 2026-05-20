@@ -1,0 +1,58 @@
+olevba 0.60.2 on Python 3.9.6 - http://decalage.info/python/oletools
+===============================================================================
+FILE: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls
+Type: OLE
+-------------------------------------------------------------------------------
+VBA MACRO ThisWorkbook.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/ThisWorkbook'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet1.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet2.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet2'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet3.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet3'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Private Sub Worksheet_SelectionChange(ByVal Target As Excel.Range)
+
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Sheet4.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet4'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet11.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/Example.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet11'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO xlm_macro.txt 
+in file: xlm_macro - OLE stream: 'xlm_macro'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' 0085     19 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Input-Star
+' 0085     20 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Input-Detai
+' 0085     23 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Results Summar
+' 0085     22 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Results-Detai
+' 0085     30 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Agency Costs Reductio
+' 0085     13 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Dela
+' 0085     10 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - P
+' 0085     21 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Interest Gai
+' 0085     18 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Time Valu
+' 0085     23 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Fuel & Emissio
++----------+--------------------+---------------------------------------------+
+|Type      |Keyword             |Description                                  |
++----------+--------------------+---------------------------------------------+
+|Suspicious|Hex Strings         |Hex-encoded strings were detected, may be    |
+|          |                    |used to obfuscate strings (option --decode to|
+|          |                    |see all)                                     |
++----------+--------------------+---------------------------------------------+
+

@@ -1,0 +1,844 @@
+olevba 0.60.2 on Python 3.9.6 - http://decalage.info/python/oletools
+===============================================================================
+FILE: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls
+Type: OLE
+-------------------------------------------------------------------------------
+VBA MACRO ThisWorkbook.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/ThisWorkbook'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet1.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet2.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet2'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet3.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet3'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Private Sub Worksheet_SelectionChange(ByVal Target As Excel.Range)
+
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Sheet4.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet4'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet11.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet11'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet31.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet31'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Private Sub Worksheet_SelectionChange(ByVal Target As Excel.Range)
+
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Module1.bas 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Module1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Sub Equilibrium()
+Attribute Equilibrium.VB_Description = "Macro recorded 11/17/98 by Elva"
+Attribute Equilibrium.VB_ProcData.VB_Invoke_Func = "T\n14"
+'
+' Equilibrium Macro
+' Macro recorded 11/17/98 by Elva
+'
+' Keyboard Shortcut: Ctrl+Shift+T
+'
+    
+    CoefT = Range("C33").Value
+    CoefP = Range("C34").Value
+        
+    TotalLane = Range("D12").Value
+    RampPrior = Range("D13").Value
+    RampAfter = Range("D14").Value
+    Speed = Range("D15").Value
+    ACCDEC = 2 * 3600 * (RampPrior + RampAfter) / Speed
+    ETCSurvival = Range("D16")
+    AgencyBase = Worksheets("Results-Detail").Cells(31, 9).Value
+    
+    For i = 1 To 20
+    
+        'Initial Condition
+            
+       CoefZ = (Range("C32").Value) * (1 - i / 20)
+       Duration = Cells(7 + i, 15).Value
+        PeakArrival = Cells(7 + i, 16).Value
+        ServiceETC = Cells(7 + i, 25).Value
+        ServiceManual = Cells(7 + i, 19).Value
+        PreETC = Cells(6 + i, 14).Value
+        NPVStar = Worksheets("Results-Detail").Cells(5 + i, 21).Value
+        For ETCLane = 1 To 11
+ 
+            
+        PriceDiff = 0
+        DiscountStar = 0
+        RelSplit = ETCLane / (TotalLane - ETCLane)
+                
+            Do
+                ManualShare = (1 - ETCSurvival * PreETC) * (1 / (1 + RelSplit))
+                ETCShare = 1 - ManualShare
+                RHOETC = PeakArrival * ETCShare / (ETCLane * ServiceETC)
+                RHOManual = PeakArrival * ManualShare / ((TotalLane - ETCLane) * ServiceManual)
+                DelayETC = 900 * Duration * ((RHOETC - 1) + Sqr((RHOETC - 1) ^ 2 + 8 * RHOETC / _
+                    (Duration * ServiceETC * ETCLane)))
+                DelayManual = 900 * Duration * ((RHOManual - 1) + Sqr((RHOManual - 1) ^ 2 + _
+                    8 * RHOManual / (Duration * ServiceManual * (TotalLane - ETCLane)))) + _
+                    3600 / ServiceManual
+                TimeDiff = (DelayETC - DelayManual - ACCDEC) / 60
+                RelSplitNew = Exp(CoefZ + CoefT * TimeDiff + CoefP * PriceDiff)
+                SplitDiff = Abs(RelSplitNew - RelSplit)
+                RelSplit = (RelSplit + RelSplitNew) / 2
+                
+            Loop While SplitDiff > 0.00001
+        
+       Cells(7 + i, 24).Value = ETCLane
+       Cells(7 + i, 14).Value = ETCShare
+            Cells(7 + i, 9).Value = PriceDiff
+            OverallNPV = Worksheets("Results-Detail").Cells(5 + i, 21).Value
+            If (OverallNPV > NPVStar) Then
+                NPVStar = OverallNPV
+                DiscountStar = PriceDiff
+                ETCShareStar = ETCShare
+                SplitStar = ETCShareStar / (1 - ETCShareStar)
+                SplitDiffStar = SplitDiff
+                DelayETCStar = DelayETC
+                DelayManualStar = DelayManual
+                TimeDiffStar = TimeDiff
+                ETCLaneStar = ETCLane
+            End If
+        Next
+        Cells(7 + i, 11).Value = SplitStar
+        Cells(7 + i, 12).Value = SplitDiffStar
+        Cells(7 + i, 14).Value = ETCShareStar
+        Cells(7 + i, 21).Value = DelayManualStar
+        Cells(7 + i, 22).Value = ACCDEC
+        Cells(7 + i, 27).Value = DelayETCStar
+        Cells(7 + i, 9).Value = DiscountStar
+        Cells(7 + i, 10).Value = TimeDiffStar
+        Cells(7 + i, 13).Value = NPVStar
+        Cells(7 + i, 11).NumberFormat = "0.00%"
+        Cells(7 + i, 12).NumberFormat = "0.00%"
+        Cells(7 + i, 14).NumberFormat = "0.00%"
+        Cells(7 + i, 9).NumberFormat = "$#,##0.00"
+        Cells(7 + i, 13).NumberFormat = "$#,##0"
+        Worksheets("ETCLANE").Cells(7 + i, 10) = ETCShareStar
+    Next
+End Sub
+
+-------------------------------------------------------------------------------
+VBA MACRO Sheet5.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet5'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet6.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet6'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet7.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet7'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet8.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet8'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Sheet9.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet9'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Module2.bas 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Module2'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Sub Macro3()
+Attribute Macro3.VB_Description = "Macro recorded 11/17/98 by PC1"
+Attribute Macro3.VB_ProcData.VB_Invoke_Func = " \n14"
+'
+' Macro3 Macro
+' Macro recorded 11/17/98 by PC1
+'
+
+'
+    Range("G11").Select
+    ActiveCell.FormulaR1C1 = "=R[-4]C[6]"
+    Range("G12").Select
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Module3.bas 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Module3'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Sub Macro1()
+Attribute Macro1.VB_Description = "Macro recorded 11/18/98 by Elva"
+Attribute Macro1.VB_ProcData.VB_Invoke_Func = " \n14"
+'
+' Macro1 Macro
+' Macro recorded 11/18/98 by Elva
+'
+
+'
+    Selection.NumberFormat = "$#,##0"
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Sheet32.cls 
+in file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls - OLE stream: '_VBA_PROJECT_CUR/VBA/Sheet32'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Private Sub Worksheet_SelectionChange(ByVal Target As Excel.Range)
+
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO xlm_macro.txt 
+in file: xlm_macro - OLE stream: 'xlm_macro'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' 0085     13 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Pric
+' 0085     15 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - ETCLAN
+' 0085     19 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Input-Star
+' 0085     20 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Input-Detai
+' 0085     23 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Results Summar
+' 0085     22 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Results-Detai
+' 0085     30 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Agency Costs Reductio
+' 0085     13 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Dela
+' 0085     10 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - P
+' 0085     21 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Interest Gai
+' 0085     18 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Time Valu
+' 0085     23 BOUNDSHEET : Sheet Information - worksheet or dialog sheet, visible - Fuel & Emissio
+-------------------------------------------------------------------------------
+VBA MACRO VBA_P-code.txt 
+in file: VBA P-code - OLE stream: 'VBA P-code'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' Processing file: /Users/dlev2617/Documents/Code/Agents/github-packages/READY-TO-UPLOAD/PUBLIC/paper-2003-04-a-model-for-optimizing-electronic-toll-collection-systems/code/original/market2.1.xls
+' ===============================================================================
+' Module streams:
+' _VBA_PROJECT_CUR/VBA/ThisWorkbook - 1190 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet1 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet2 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet3 - 1726 bytes
+' Line #0:
+' 	FuncDefn (Private Sub Worksheet_SelectionChange(ByVal Target As ))
+' Line #1:
+' Line #2:
+' 	EndSub 
+' _VBA_PROJECT_CUR/VBA/Sheet4 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet11 - 1183 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet31 - 1695 bytes
+' Line #0:
+' 	FuncDefn (Private Sub Worksheet_SelectionChange(ByVal Target As ))
+' Line #1:
+' Line #2:
+' 	EndSub 
+' _VBA_PROJECT_CUR/VBA/Module1 - 12307 bytes
+' Line #0:
+' 	FuncDefn (Sub Equilibrium())
+' Line #1:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #2:
+' 	QuoteRem 0x0000 0x0012 " Equilibrium Macro"
+' Line #3:
+' 	QuoteRem 0x0000 0x0020 " Macro recorded 11/17/98 by Elva"
+' Line #4:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #5:
+' 	QuoteRem 0x0000 0x0020 " Keyboard Shortcut: Ctrl+Shift+T"
+' Line #6:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #7:
+' Line #8:
+' 	LitStr 0x0003 "C33"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	St CoefT 
+' Line #9:
+' 	LitStr 0x0003 "C34"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	St CoefP 
+' Line #10:
+' Line #11:
+' 	LitStr 0x0003 "D12"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	St TotalLane 
+' Line #12:
+' 	LitStr 0x0003 "D13"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	St RampPrior 
+' Line #13:
+' 	LitStr 0x0003 "D14"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	St RampAfter 
+' Line #14:
+' 	LitStr 0x0003 "D15"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	St Speed 
+' Line #15:
+' 	LitDI2 0x0002 
+' 	LitDI2 0x0E10 
+' 	Mul 
+' 	Ld RampPrior 
+' 	Ld RampAfter 
+' 	Add 
+' 	Paren 
+' 	Mul 
+' 	Ld Speed 
+' 	Div 
+' 	St ACCDEC 
+' Line #16:
+' 	LitStr 0x0003 "D16"
+' 	ArgsLd Range 0x0001 
+' 	St ManualShare 
+' Line #17:
+' 	LitDI2 0x001F 
+' 	LitDI2 0x0009 
+' 	LitStr 0x000E "Results-Detail"
+' 	ArgsLd _B_var_AgencyNPV 0x0001 
+' 	ArgsMemLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St AgencyBaseThen 
+' Line #18:
+' Line #19:
+' 	StartForVariable 
+' 	Ld _B_var_i 
+' 	EndForVariable 
+' 	LitDI2 0x0001 
+' 	LitDI2 0x0014 
+' 	For 
+' Line #20:
+' Line #21:
+' 	QuoteRem 0x0008 0x0011 "Initial Condition"
+' Line #22:
+' Line #23:
+' 	LitStr 0x0003 "C32"
+' 	ArgsLd Range 0x0001 
+' 	MemLd Value 
+' 	Paren 
+' 	LitDI2 0x0001 
+' 	Ld _B_var_i 
+' 	LitDI2 0x0014 
+' 	Div 
+' 	Sub 
+' 	Paren 
+' 	Mul 
+' 	St CoefZ 
+' Line #24:
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000F 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St Duration 
+' Line #25:
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0010 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St PeakArrival 
+' Line #26:
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0019 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St ServiceETC 
+' Line #27:
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0013 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St ServiceManual 
+' Line #28:
+' 	LitDI2 0x0006 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000E 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St _B_var_PreETC 
+' Line #29:
+' 	LitDI2 0x0005 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0015 
+' 	LitStr 0x000E "Results-Detail"
+' 	ArgsLd _B_var_AgencyNPV 0x0001 
+' 	ArgsMemLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St _B_var_If 
+' Line #30:
+' 	StartForVariable 
+' 	Ld ETCLane 
+' 	EndForVariable 
+' 	LitDI2 0x0001 
+' 	LitDI2 0x000B 
+' 	For 
+' Line #31:
+' Line #32:
+' Line #33:
+' 	LitDI2 0x0000 
+' 	St PriceDiff 
+' Line #34:
+' 	LitDI2 0x0000 
+' 	St ETCShareStar 
+' Line #35:
+' 	Ld ETCLane 
+' 	Ld TotalLane 
+' 	Ld ETCLane 
+' 	Sub 
+' 	Paren 
+' 	Div 
+' 	St RelSplit 
+' Line #36:
+' Line #37:
+' 	Do 
+' Line #38:
+' 	LitDI2 0x0001 
+' 	Ld ManualShare 
+' 	Ld _B_var_PreETC 
+' 	Mul 
+' 	Sub 
+' 	Paren 
+' 	LitDI2 0x0001 
+' 	LitDI2 0x0001 
+' 	Ld RelSplit 
+' 	Add 
+' 	Paren 
+' 	Div 
+' 	Paren 
+' 	Mul 
+' 	St _B_var_ManualShare 
+' Line #39:
+' 	LitDI2 0x0001 
+' 	Ld _B_var_ManualShare 
+' 	Sub 
+' 	St ETCShare 
+' Line #40:
+' 	Ld PeakArrival 
+' 	Ld ETCShare 
+' 	Mul 
+' 	Ld ETCLane 
+' 	Ld ServiceETC 
+' 	Mul 
+' 	Paren 
+' 	Div 
+' 	St RHOETC 
+' Line #41:
+' 	Ld PeakArrival 
+' 	Ld _B_var_ManualShare 
+' 	Mul 
+' 	Ld TotalLane 
+' 	Ld ETCLane 
+' 	Sub 
+' 	Paren 
+' 	Ld ServiceManual 
+' 	Mul 
+' 	Paren 
+' 	Div 
+' 	St RHOManual 
+' Line #42:
+' 	LineCont 0x0004 1B 00 14 00
+' 	LitDI2 0x0384 
+' 	Ld Duration 
+' 	Mul 
+' 	Ld RHOETC 
+' 	LitDI2 0x0001 
+' 	Sub 
+' 	Paren 
+' 	Ld RHOETC 
+' 	LitDI2 0x0001 
+' 	Sub 
+' 	Paren 
+' 	LitDI2 0x0002 
+' 	Pwr 
+' 	LitDI2 0x0008 
+' 	Ld RHOETC 
+' 	Mul 
+' 	Ld Duration 
+' 	Ld ServiceETC 
+' 	Mul 
+' 	Ld ETCLane 
+' 	Mul 
+' 	Paren 
+' 	Div 
+' 	Add 
+' 	ArgsLd Sqr 0x0001 
+' 	Add 
+' 	Paren 
+' 	Mul 
+' 	St DelayETC 
+' Line #43:
+' 	LineCont 0x0008 17 00 14 00 29 00 14 00
+' 	LitDI2 0x0384 
+' 	Ld Duration 
+' 	Mul 
+' 	Ld RHOManual 
+' 	LitDI2 0x0001 
+' 	Sub 
+' 	Paren 
+' 	Ld RHOManual 
+' 	LitDI2 0x0001 
+' 	Sub 
+' 	Paren 
+' 	LitDI2 0x0002 
+' 	Pwr 
+' 	LitDI2 0x0008 
+' 	Ld RHOManual 
+' 	Mul 
+' 	Ld Duration 
+' 	Ld ServiceManual 
+' 	Mul 
+' 	Ld TotalLane 
+' 	Ld ETCLane 
+' 	Sub 
+' 	Paren 
+' 	Mul 
+' 	Paren 
+' 	Div 
+' 	Add 
+' 	ArgsLd Sqr 0x0001 
+' 	Add 
+' 	Paren 
+' 	Mul 
+' 	LitDI2 0x0E10 
+' 	Ld ServiceManual 
+' 	Div 
+' 	Add 
+' 	St DelayManual 
+' Line #44:
+' 	Ld DelayETC 
+' 	Ld DelayManual 
+' 	Sub 
+' 	Ld ACCDEC 
+' 	Sub 
+' 	Paren 
+' 	LitDI2 0x003C 
+' 	Div 
+' 	St TimeDiff 
+' Line #45:
+' 	Ld CoefZ 
+' 	Ld CoefT 
+' 	Ld TimeDiff 
+' 	Mul 
+' 	Add 
+' 	Ld CoefP 
+' 	Ld PriceDiff 
+' 	Mul 
+' 	Add 
+' 	ArgsLd Exp 0x0001 
+' 	St RelSplitNew 
+' Line #46:
+' 	Ld RelSplitNew 
+' 	Ld RelSplit 
+' 	Sub 
+' 	FnAbs 
+' 	St SplitDiff 
+' Line #47:
+' 	Ld RelSplit 
+' 	Ld RelSplitNew 
+' 	Add 
+' 	Paren 
+' 	LitDI2 0x0002 
+' 	Div 
+' 	St RelSplit 
+' Line #48:
+' Line #49:
+' 	Ld SplitDiff 
+' 	LitR8 0x68F1 0x88E3 0xF8B5 0x3EE4 
+' 	Gt 
+' 	LoopWhile 
+' Line #50:
+' Line #51:
+' 	Ld ETCLane 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0018 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #52:
+' 	Ld ETCShare 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000E 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #53:
+' 	Ld PriceDiff 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0009 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #54:
+' 	LitDI2 0x0005 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0015 
+' 	LitStr 0x000E "Results-Detail"
+' 	ArgsLd _B_var_AgencyNPV 0x0001 
+' 	ArgsMemLd _B_var_j 0x0002 
+' 	MemLd Value 
+' 	St AgencyBenefit 
+' Line #55:
+' 	Ld AgencyBenefit 
+' 	Ld _B_var_If 
+' 	Gt 
+' 	Paren 
+' 	IfBlock 
+' Line #56:
+' 	Ld AgencyBenefit 
+' 	St _B_var_If 
+' Line #57:
+' 	Ld PriceDiff 
+' 	St ETCShareStar 
+' Line #58:
+' 	Ld ETCShare 
+' 	St _B_var_ETCShareStar 
+' Line #59:
+' 	Ld _B_var_ETCShareStar 
+' 	LitDI2 0x0001 
+' 	Ld _B_var_ETCShareStar 
+' 	Sub 
+' 	Paren 
+' 	Div 
+' 	St _B_var_SplitStar 
+' Line #60:
+' 	Ld SplitDiff 
+' 	St _B_var_SplitDiffStar 
+' Line #61:
+' 	Ld DelayETC 
+' 	St ACCDECStar 
+' Line #62:
+' 	Ld DelayManual 
+' 	St DelayETCStar 
+' Line #63:
+' 	Ld TimeDiff 
+' 	St _B_var_TimeDiffStar 
+' Line #64:
+' 	Ld ETCLane 
+' 	St T 
+' Line #65:
+' 	EndIfBlock 
+' Line #66:
+' 	StartForVariable 
+' 	Next 
+' Line #67:
+' 	Ld _B_var_SplitStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000B 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #68:
+' 	Ld _B_var_SplitDiffStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000C 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #69:
+' 	Ld _B_var_ETCShareStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000E 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #70:
+' 	Ld DelayETCStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0015 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #71:
+' 	Ld ACCDEC 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0016 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #72:
+' 	Ld ACCDECStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x001B 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #73:
+' 	Ld ETCShareStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0009 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #74:
+' 	Ld _B_var_TimeDiffStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000A 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #75:
+' 	Ld _B_var_If 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000D 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt Value 
+' Line #76:
+' 	LitStr 0x0005 "0.00%"
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000B 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt NumberFormat 
+' Line #77:
+' 	LitStr 0x0005 "0.00%"
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000C 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt NumberFormat 
+' Line #78:
+' 	LitStr 0x0005 "0.00%"
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000E 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt NumberFormat 
+' Line #79:
+' 	LitStr 0x0009 "$#,##0.00"
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x0009 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt NumberFormat 
+' Line #80:
+' 	LitStr 0x0006 "$#,##0"
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000D 
+' 	ArgsLd _B_var_j 0x0002 
+' 	MemSt NumberFormat 
+' Line #81:
+' 	Ld _B_var_ETCShareStar 
+' 	LitDI2 0x0007 
+' 	Ld _B_var_i 
+' 	Add 
+' 	LitDI2 0x000A 
+' 	LitStr 0x0007 "ETCLANE"
+' 	ArgsLd _B_var_AgencyNPV 0x0001 
+' 	ArgsMemSt _B_var_j 0x0002 
+' Line #82:
+' 	StartForVariable 
+' 	Next 
+' Line #83:
+' 	EndSub 
+' Line #84:
+' _VBA_PROJECT_CUR/VBA/Sheet5 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet6 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet7 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet8 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Sheet9 - 1182 bytes
+' _VBA_PROJECT_CUR/VBA/Module2 - 2312 bytes
+' Line #0:
+' 	FuncDefn (Sub Macro3())
+' Line #1:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #2:
+' 	QuoteRem 0x0000 0x000D " Macro3 Macro"
+' Line #3:
+' 	QuoteRem 0x0000 0x001F " Macro recorded 11/17/98 by PC1"
+' Line #4:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #5:
+' Line #6:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #7:
+' 	LitStr 0x0003 "G11"
+' 	ArgsLd Range 0x0001 
+' 	ArgsMemCall Set 0x0000 
+' Line #8:
+' 	LitStr 0x000A "=R[-4]C[6]"
+' 	Ld ActiveCell 
+' 	MemSt FormulaR1C1 
+' Line #9:
+' 	LitStr 0x0003 "G12"
+' 	ArgsLd Range 0x0001 
+' 	ArgsMemCall Set 0x0000 
+' Line #10:
+' 	EndSub 
+' _VBA_PROJECT_CUR/VBA/Module3 - 1364 bytes
+' Line #0:
+' 	FuncDefn (Sub Macro1())
+' Line #1:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #2:
+' 	QuoteRem 0x0000 0x000D " Macro1 Macro"
+' Line #3:
+' 	QuoteRem 0x0000 0x0020 " Macro recorded 11/18/98 by Elva"
+' Line #4:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #5:
+' Line #6:
+' 	QuoteRem 0x0000 0x0000 ""
+' Line #7:
+' 	LitStr 0x0006 "$#,##0"
+' 	Ld Selection 
+' 	MemSt NumberFormat 
+' Line #8:
+' 	EndSub 
+' _VBA_PROJECT_CUR/VBA/Sheet32 - 1705 bytes
+' Line #0:
+' 	FuncDefn (Private Sub Worksheet_SelectionChange(ByVal Target As ))
+' Line #1:
+' Line #2:
+' 	EndSub 
++----------+--------------------+---------------------------------------------+
+|Type      |Keyword             |Description                                  |
++----------+--------------------+---------------------------------------------+
+|Suspicious|Hex Strings         |Hex-encoded strings were detected, may be    |
+|          |                    |used to obfuscate strings (option --decode to|
+|          |                    |see all)                                     |
+|Suspicious|VBA Stomping        |VBA Stomping was detected: the VBA source    |
+|          |                    |code and P-code are different, this may have |
+|          |                    |been used to hide malicious code             |
++----------+--------------------+---------------------------------------------+
+VBA Stomping detection is experimental: please report any false positive/negative at https://github.com/decalage2/oletools/issues
+

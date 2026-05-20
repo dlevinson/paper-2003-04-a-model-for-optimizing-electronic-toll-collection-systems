@@ -1,0 +1,7 @@
+relative_path,has_vba_streams,vba_stream_count,module_streams,extracted_text_path,note
+data/original/CarquinToll.xls,no,0,,,No VBA stream detected in OLE inspection
+code/original/AUTOMAT.XLS,yes,10,,code/extracted_vba/AUTOMAT.vba.txt,VBA/XLM text extracted for review
+code/original/Example.xls,yes,14,,code/extracted_vba/Example.vba.txt,VBA/XLM text extracted for review
+code/original/SampleEnumeration.xls,no,0,,,No VBA stream detected in OLE inspection
+code/original/logittest.xls,no,0,,,No VBA stream detected in OLE inspection
+code/original/market2.1.xls,yes,54,,code/extracted_vba/market2.1.vba.txt,VBA/XLM text extracted for review
